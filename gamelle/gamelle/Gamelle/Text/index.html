@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Text (gamelle.Gamelle.Text)</title><meta charset="utf-8"/><link rel="stylesheet" href="../../../odoc.support/odoc.css"/><meta name="generator" content="odoc 2.4.1"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><script src="../../../odoc.support/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script><script>let base_url = '../../../';
+let search_urls = ['../../db.js','../../../sherlodoc.js'];
+</script><script src="../../../odoc.support/odoc_search.js" defer="defer"></script></head><body class="odoc"><nav class="odoc-nav"><a href="../index.html">Up</a> – <a href="../../index.html">gamelle</a> &#x00BB; <a href="../index.html">Gamelle</a> &#x00BB; Text</nav><div class="odoc-search"><div class="search-inner"><input class="search-bar" placeholder="🔎 Search..."/><div class="search-snake"></div><div class="search-result"></div></div></div><header class="odoc-preamble"><h1>Module <code><span>Gamelle.Text</span></code></h1><p>Text rendering.</p></header><nav class="odoc-toc"><ul><li><a href="#measure">Measure</a></li></ul></nav><div class="odoc-content"><div class="odoc-spec"><div class="spec value anchored" id="val-draw"><a href="#val-draw" class="anchor"></a><code><span><span class="keyword">val</span> draw : 
+  <span><span class="label">io</span>:<a href="../index.html#type-io">io</a> <span class="arrow">&#45;&gt;</span></span>
+  <span><span class="optlabel">?color</span>:<a href="../Color/index.html#type-t">Color.t</a> <span class="arrow">&#45;&gt;</span></span>
+  <span><span class="optlabel">?font</span>:<a href="../Font/index.html#type-t">Font.t</a> <span class="arrow">&#45;&gt;</span></span>
+  <span><span class="optlabel">?size</span>:int <span class="arrow">&#45;&gt;</span></span>
+  <span><span class="label">at</span>:<a href="../Point/index.html#type-t">Point.t</a> <span class="arrow">&#45;&gt;</span></span>
+  <span>string <span class="arrow">&#45;&gt;</span></span>
+  unit</span></code></div><div class="spec-doc"><p><code>draw ~io ~at txt</code> prints the string <code>txt</code> at position <code>at</code> on the screen.</p></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-draw_multiline"><a href="#val-draw_multiline" class="anchor"></a><code><span><span class="keyword">val</span> draw_multiline : 
+  <span><span class="label">io</span>:<a href="../index.html#type-io">io</a> <span class="arrow">&#45;&gt;</span></span>
+  <span><span class="optlabel">?color</span>:<a href="../Color/index.html#type-t">Color.t</a> <span class="arrow">&#45;&gt;</span></span>
+  <span><span class="optlabel">?width</span>:float <span class="arrow">&#45;&gt;</span></span>
+  <span><span class="optlabel">?interline</span>:float <span class="arrow">&#45;&gt;</span></span>
+  <span><span class="optlabel">?font</span>:<a href="../Font/index.html#type-t">Font.t</a> <span class="arrow">&#45;&gt;</span></span>
+  <span><span class="optlabel">?size</span>:int <span class="arrow">&#45;&gt;</span></span>
+  <span><span class="label">at</span>:<a href="../Point/index.html#type-t">Point.t</a> <span class="arrow">&#45;&gt;</span></span>
+  <span>string <span class="arrow">&#45;&gt;</span></span>
+  unit</span></code></div><div class="spec-doc"><p><code>draw_multiline ~io ~at txt</code> prints the string <code>txt</code> at position <code>at</code> on the screen, possibly wrapping it on multiple lines if the text overflows <code>?width</code>.</p></div></div><h3 id="measure"><a href="#measure" class="anchor"></a>Measure</h3><div class="odoc-spec"><div class="spec value anchored" id="val-size"><a href="#val-size" class="anchor"></a><code><span><span class="keyword">val</span> size : <span><span class="label">io</span>:<a href="../index.html#type-io">io</a> <span class="arrow">&#45;&gt;</span></span> <span><span class="optlabel">?font</span>:<a href="../Font/index.html#type-t">Font.t</a> <span class="arrow">&#45;&gt;</span></span> <span><span class="optlabel">?size</span>:int <span class="arrow">&#45;&gt;</span></span> <span>string <span class="arrow">&#45;&gt;</span></span> <a href="../Size/index.html#type-t">Size.t</a></span></code></div><div class="spec-doc"><p><code>size ~io str</code> returns the size that would be used by <a href="#val-draw"><code>draw</code></a> to render the text <code>str</code>.</p></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-size_multiline"><a href="#val-size_multiline" class="anchor"></a><code><span><span class="keyword">val</span> size_multiline : 
+  <span><span class="label">io</span>:<a href="../index.html#type-io">io</a> <span class="arrow">&#45;&gt;</span></span>
+  <span><span class="optlabel">?width</span>:float <span class="arrow">&#45;&gt;</span></span>
+  <span><span class="optlabel">?interline</span>:float <span class="arrow">&#45;&gt;</span></span>
+  <span><span class="optlabel">?font</span>:<a href="../Font/index.html#type-t">Font.t</a> <span class="arrow">&#45;&gt;</span></span>
+  <span><span class="optlabel">?size</span>:int <span class="arrow">&#45;&gt;</span></span>
+  <span>string <span class="arrow">&#45;&gt;</span></span>
+  <a href="../Size/index.html#type-t">Size.t</a></span></code></div><div class="spec-doc"><p><code>size_multiline ~io str</code> returns the size that would be used by <a href="#val-draw_multiline"><code>draw_multiline</code></a> to render the text <code>str</code> on multiple lines.</p></div></div></div></body></html>

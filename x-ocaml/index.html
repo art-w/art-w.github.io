@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+  <head>
+    <title>OCaml notebooks</title>
+
+    <script async
+      src="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@1/x-ocaml.js"
+      src-worker="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@1/x-ocaml.worker+effects.js"
+      src-load="./re_digestif_show.js"
+    ></script>
+
+    <style>
+      body {
+        margin: 0;
+        padding: 2em 3em;
+        max-width: 50em;
+      }
+      
+      x-ocaml:not(:defined) {
+        display: block;
+        white-space: pre-wrap;
+        padding: 4px 0.3em 4px 46px;
+        line-height: 1.4em;
+        font-family: monospace;
+        font-size: 1.2em;
+      }
+      
+      code { font-size: 1.1em }
+      hl { background-color: lightyellow }
+      p { line-height: 1.5em }
+      pre {
+        background: #F0EEFF;
+        font-size: 1.1em;
+        padding: 0.5em 1em;
+      }
+    </style>
+  </head>
+  <body>
+
+    <h1>OCaml notebooks</h1>
+
+    <p>An attempt at making it simpler to embed the OCaml interpreter, Merlin and OCamlformat, in any webpage thanks to WebComponents:</p>
+
+    <x-ocaml>let rec fib n = if n &lt;= 1 then n else fib (n - 1) + fib (n - 2);;</x-ocaml>
+
+    <p>The different editors follow each others and can reference previous definitions:</p>
+
+    <x-ocaml>let v = fib 8
+let () = Format.printf "fib 10 =@.  %#i@." (fib 10)</x-ocaml>
+
+    <p>And of course, effect support:</p>
+
+    <x-ocaml>type _ Effect.t += A : unit Effect.t
+let v = match Effect.perform A with
+  | () -&gt; ()
+  | effect A, k -&gt; Effect.Deep.continue k ()</x-ocaml>
+
+    <p>(Note: OCamlformat doesn't yet support the effect syntax?)</p>
+
+    <h2>Integration</h2>
+
+    <p>Just link the scripts with:</p>
+
+    <pre>&lt;script async
+  src="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@1/x-ocaml.js"
+  src-worker="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@1/x-ocaml.worker+effects.js"
+&gt;&lt;/script&gt;</pre>
+
+    <p>Importing those scripts will define a new HTML element <code>&lt;x-ocaml&gt;</code> thanks to WebComponents, which can be used to add new editors in the page with: (also check the html source of this page):</p>
+
+    <pre>&lt;x-ocaml&gt;let x = 42&lt;/x-ocaml&gt;</pre>
+    <x-ocaml>let x = 42</x-ocaml>
+
+    <p>The <code>x-ocaml.js</code> defines the webcomponent and code-mirror integration, while the <code>x-ocaml.worker.js</code> will spawn a webworker to run the OCaml interpreter, Merlin and OCamlformat in a separate thread.</p>
+
+    <p>The support for effect handlers adds a couple mb to the runtime and libraries, so instead you might want to use the version without effect handlers <code>x-ocaml.worker.js</code> (instead of <code>x-ocaml.worker+effects.js</code>):</p>
+
+    <pre>&lt;script async
+  src="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@1/x-ocaml.js"
+  src-worker="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@1/<hl>x-ocaml.worker.js</hl>"
+&gt;&lt;/script&gt;</pre>
+
+    <p>To avoid the page layout shifting once CodeMirror loads, we recommend the following CSS:</p>
+
+    <pre>x-ocaml:not(:defined) {
+  display: block;
+  white-space: pre-wrap;
+  padding: 4px 0.3em 4px 46px;
+  line-height: 1.4em;
+  font-family: monospace;
+  font-size: 1.2em;
+}</pre>
+
+    <h2>Loading libraries</h2>
+
+    <p>There's also a shell utility to export OCaml libraries and PPX: (drop the <code>--effects</code> if using the worker without effects)</p>
+
+    <pre>$ x-ocaml --effects re digestif.ocaml -o re_digestif.js</pre>
+    <pre>$ x-ocaml --effects re digestif.ocaml <hl>--ppx ppx_deriving.show</hl> -o re_digestif_show.js</pre>
+
+
+    <p>Which can be linked in the html page with:</p>
+
+    <pre>&lt;script async src="..." src-worker="..." <hl>src-load="./re_digestif_show.js"</hl> &gt;&lt;/script&gt;</pre>
+
+    <p>So that they become accessible in the notebook cells:</p>
+
+    <x-ocaml>let re = Re.(compile (seq [any;any]))
+let hash = Digestif.MD5.(digest_string "hello" |> to_hex)</x-ocaml>
+
+    <p>PPX support only works for the toplevel atm, as Merlin doesn't yet see that the ppx generates <code>show</code>: (wip!)</p>
+
+    <x-ocaml>type t = A of int [@@deriving show]
+let v = show (A 42)</x-ocaml>
+
+  </body>
+</html>

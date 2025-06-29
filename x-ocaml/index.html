@@ -4,8 +4,8 @@
     <title>OCaml notebooks</title>
 
     <script async
-      src="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@1/x-ocaml.js"
-      src-worker="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@1/x-ocaml.worker+effects.js"
+      src="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@2/x-ocaml.js"
+      src-worker="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@2/x-ocaml.worker+effects.js"
       src-load="./re_digestif_show.js"
     ></script>
 
@@ -62,8 +62,8 @@ let v = match Effect.perform A with
     <p>Just link the scripts with:</p>
 
     <pre>&lt;script async
-  src="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@1/x-ocaml.js"
-  src-worker="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@1/x-ocaml.worker+effects.js"
+  src="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@2/x-ocaml.js"
+  src-worker="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@2/x-ocaml.worker+effects.js"
 &gt;&lt;/script&gt;</pre>
 
     <p>Importing those scripts will define a new HTML element <code>&lt;x-ocaml&gt;</code> thanks to WebComponents, which can be used to add new editors in the page with: (also check the html source of this page):</p>
@@ -76,8 +76,8 @@ let v = match Effect.perform A with
     <p>The support for effect handlers adds a couple mb to the runtime and libraries, so instead you might want to use the version without effect handlers <code>x-ocaml.worker.js</code> (instead of <code>x-ocaml.worker+effects.js</code>):</p>
 
     <pre>&lt;script async
-  src="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@1/x-ocaml.js"
-  src-worker="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@1/<hl>x-ocaml.worker.js</hl>"
+  src="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@2/x-ocaml.js"
+  src-worker="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@2/<hl>x-ocaml.worker.js</hl>"
 &gt;&lt;/script&gt;</pre>
 
     <p>To avoid the page layout shifting once CodeMirror loads, we recommend the following CSS:</p>
@@ -90,6 +90,13 @@ let v = match Effect.perform A with
   font-family: monospace;
   font-size: 1.2em;
 }</pre>
+
+    <p>You can also style the WebComponent when loading the script with the attribute <code>inline-style="..."</code> and/or load an external stylesheet with the tag <code>src-style="./extra.css"</code></p>
+
+    <pre>&lt;script async src="..." src-worker="..."
+  <hl>inline-style="font-size:2em"</hl>
+  <hl>src-style="./extra.css"</hl>
+&gt;&lt;/script&gt;</pre>
 
     <h2>Loading libraries</h2>
 

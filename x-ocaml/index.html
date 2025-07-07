@@ -4,8 +4,8 @@
     <title>OCaml notebooks</title>
 
     <script async
-      src="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@2/x-ocaml.js"
-      src-worker="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@2/x-ocaml.worker+effects.js"
+      src="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@4/x-ocaml.js"
+      src-worker="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@4/x-ocaml.worker+effects.js"
       src-load="./re_digestif_show.js"
     ></script>
 
@@ -48,22 +48,32 @@
     <x-ocaml>let v = fib 8
 let () = Format.printf "fib 10 =@.  %#i@." (fib 10)</x-ocaml>
 
-    <p>And of course, effect support:</p>
+    <p>And of course, effect support: (note that OCamlformat doesn't yet support the effect syntax)</p>
 
     <x-ocaml>type _ Effect.t += A : unit Effect.t
 let v = match Effect.perform A with
   | () -&gt; ()
   | effect A, k -&gt; Effect.Deep.continue k ()</x-ocaml>
 
-    <p>(Note: OCamlformat doesn't yet support the effect syntax?)</p>
+    <p></p>
+
+    <p>There's also experimental support for outputing HTML visualizations, using the <code>X_ocaml_lib.output_html</code> function:</p>
+
+    <x-ocaml>let () =
+  X_ocaml_lib.output_html
+    {|&lt;svg height="210" width="500" xmlns="http://www.w3.org/2000/svg"&gt;
+      &lt;polygon points="100,10 40,198 190,78 10,78 160,198"
+      style="fill:yellow;stroke:darkblue;stroke-width:5"/&gt;&lt;/svg&gt;|}</x-ocaml>
+
+    <p>See a <a href="https://static.sherlocode.com/x-ocaml_viz.html">longer example</a> on how to integrate <code>x-ocaml</code> with tyxml or graphviz.</p>
 
     <h2>Integration</h2>
 
     <p>Just link the scripts with:</p>
 
     <pre>&lt;script async
-  src="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@2/x-ocaml.js"
-  src-worker="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@2/x-ocaml.worker+effects.js"
+  src="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@4/x-ocaml.js"
+  src-worker="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@4/x-ocaml.worker+effects.js"
 &gt;&lt;/script&gt;</pre>
 
     <p>Importing those scripts will define a new HTML element <code>&lt;x-ocaml&gt;</code> thanks to WebComponents, which can be used to add new editors in the page with: (also check the html source of this page):</p>
@@ -76,8 +86,8 @@ let v = match Effect.perform A with
     <p>The support for effect handlers adds a couple mb to the runtime and libraries, so instead you might want to use the version without effect handlers <code>x-ocaml.worker.js</code> (instead of <code>x-ocaml.worker+effects.js</code>):</p>
 
     <pre>&lt;script async
-  src="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@2/x-ocaml.js"
-  src-worker="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@2/<hl>x-ocaml.worker.js</hl>"
+  src="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@4/x-ocaml.js"
+  src-worker="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@4/<hl>x-ocaml.worker.js</hl>"
 &gt;&lt;/script&gt;</pre>
 
     <p>To avoid the page layout shifting once CodeMirror loads, we recommend the following CSS:</p>
@@ -85,7 +95,7 @@ let v = match Effect.perform A with
     <pre>x-ocaml:not(:defined) {
   display: block;
   white-space: pre-wrap;
-  padding: 4px 0.3em 4px 46px;
+  padding: 4px 0.3em 4px 48px;
   line-height: 1.4em;
   font-family: monospace;
   font-size: 1.2em;

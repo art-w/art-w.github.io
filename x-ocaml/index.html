@@ -4,8 +4,8 @@
     <title>OCaml notebooks</title>
 
     <script async
-      src="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@4/x-ocaml.js"
-      src-worker="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@4/x-ocaml.worker+effects.js"
+      src="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@5/x-ocaml.js"
+      src-worker="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@5/x-ocaml.worker+effects.js"
       src-load="./re_digestif_show.js"
     ></script>
 
@@ -48,7 +48,7 @@
     <x-ocaml>let v = fib 8
 let () = Format.printf "fib 10 =@.  %#i@." (fib 10)</x-ocaml>
 
-    <p>And of course, effect support: (note that OCamlformat doesn't yet support the effect syntax)</p>
+    <p>And of course, effect support:</p>
 
     <x-ocaml>type _ Effect.t += A : unit Effect.t
 let v = match Effect.perform A with
@@ -67,13 +67,15 @@ let v = match Effect.perform A with
 
     <p>See a <a href="https://static.sherlocode.com/x-ocaml_viz.html">longer example</a> on how to integrate <code>x-ocaml</code> with tyxml or graphviz.</p>
 
+    <p>To convert markdown files to html, the command-line tool <a href="https://github.com/patricoferris/xocmd">xocmd</a> by <a href="https://github.com/patricoferris">@patricoferris</a> will automatically insert the <code>&lt;x-ocaml&gt;</code> tags!</p>
+
     <h2>Integration</h2>
 
     <p>Just link the scripts with:</p>
 
     <pre>&lt;script async
-  src="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@4/x-ocaml.js"
-  src-worker="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@4/x-ocaml.worker+effects.js"
+  src="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@5/x-ocaml.js"
+  src-worker="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@5/x-ocaml.worker+effects.js"
 &gt;&lt;/script&gt;</pre>
 
     <p>Importing those scripts will define a new HTML element <code>&lt;x-ocaml&gt;</code> thanks to WebComponents, which can be used to add new editors in the page with: (also check the html source of this page):</p>
@@ -86,8 +88,8 @@ let v = match Effect.perform A with
     <p>The support for effect handlers adds a couple mb to the runtime and libraries, so instead you might want to use the version without effect handlers <code>x-ocaml.worker.js</code> (instead of <code>x-ocaml.worker+effects.js</code>):</p>
 
     <pre>&lt;script async
-  src="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@4/x-ocaml.js"
-  src-worker="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@4/<hl>x-ocaml.worker.js</hl>"
+  src="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@5/x-ocaml.js"
+  src-worker="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@5/<hl>x-ocaml.worker.js</hl>"
 &gt;&lt;/script&gt;</pre>
 
     <p>To avoid the page layout shifting once CodeMirror loads, we recommend the following CSS:</p>

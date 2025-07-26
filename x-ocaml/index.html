@@ -6,6 +6,8 @@
     <script async
       src="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@6/x-ocaml.js"
       src-worker="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@6/x-ocaml.worker+effects.js"
+      integrity="sha256-3ITn2LRgP/8Rz6oqP5ZQTysesNaSi6/iEdbDvBfyCSE="
+      crossorigin="anonymous"
       src-load="./re_digestif_show.js"
     ></script>
 
@@ -76,6 +78,8 @@ let v = match Effect.perform A with
     <pre>&lt;script async
   src="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@6/x-ocaml.js"
   src-worker="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@6/x-ocaml.worker+effects.js"
+  integrity="sha256-3ITn2LRgP/8Rz6oqP5ZQTysesNaSi6/iEdbDvBfyCSE="
+  crossorigin="anonymous"
 &gt;&lt;/script&gt;</pre>
 
     <p>Importing those scripts will define a new HTML element <code>&lt;x-ocaml&gt;</code> thanks to WebComponents, which can be used to add new editors in the page with: (also check the html source of this page):</p>
@@ -90,7 +94,11 @@ let v = match Effect.perform A with
     <pre>&lt;script async
   src="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@6/x-ocaml.js"
   src-worker="https://cdn.jsdelivr.net/gh/art-w/x-ocaml.js@6/<hl>x-ocaml.worker.js</hl>"
+  integrity="sha256-3ITn2LRgP/8Rz6oqP5ZQTysesNaSi6/iEdbDvBfyCSE="
+  crossorigin="anonymous"
 &gt;&lt;/script&gt;</pre>
+
+    <p>To avoid relying on a CDN to serve the javascript files, please check out the <a href="https://github.com/art-w/x-ocaml">x-ocaml repository</a> for instructions to reproduce them.</p>
 
     <h2>Loading libraries</h2>
 
